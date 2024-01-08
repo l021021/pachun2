@@ -1,5 +1,34 @@
 import requests
 import json
+import pandas as pd
+
+
+def flatten_json(nested_json, exclude=['']):
+    """Flatten json object with nested keys into a single level.
+        Args:
+            nested_json: A nested json object.
+            exclude: Keys to exclude from output.
+        Returns:
+            The flattened json object if successful, None otherwise.
+    """
+    out = {}
+
+    def flatten(x, name='', exclude=exclude):
+        if type(x) is dict:
+            for a in x:
+                if a not in exclude:
+                    flatten(x[a], name + a + '_')
+        elif type(x) is list:
+            i = 0
+            for a in x:
+                flatten(a, name + str(i) + '_')
+                i += 1
+        else:
+            out[name[:-1]] = x
+
+    flatten(nested_json)
+    return out
+
 
 # 定义URL
 url = "https://jobsapi-google.m-cloud.io/api/job/search?callback=jobsCallback&pageSize=1000&offset=0&companyName=companies%2Fd475e46c-52e0-4b9b-a525-48027b002583&customAttributeFilter=ats_portalid%3D%22SuccessFactors%22&orderBy=posting_publish_time%20desc&disableSpellCheck=true&enableBroadening=true"
