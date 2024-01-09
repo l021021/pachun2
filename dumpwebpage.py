@@ -60,6 +60,7 @@ data = json.loads(response.text[13:-1])
 nextpagetoken = data['nextPageToken']
 print(nextpagetoken)
 
+'''
 if nextpagetoken != '':
     url = "https://jobsapi-google.m-cloud.io/api/job/search?callback=jobsCallback&pageSize=100&offset=100&companyName=companies%2Fd475e46c-52e0-4b9b-a525-48027b002583&customAttributeFilter=ats_portalid%3D%22SuccessFactors%22&orderBy=posting_publish_time%20desc&disableSpellCheck=true&enableBroadening=true"
     headers = {
@@ -75,6 +76,7 @@ data = json.loads(response.text[13:-1])
 nextpagetoken = data['nextPageToken']
 print(nextpagetoken)
 
+'''
 # 将数据写入本地JSON文件
 with open("page.json", "w", encoding='utf-8') as file:
     json.dump(data, file, ensure_ascii=False, indent=4)

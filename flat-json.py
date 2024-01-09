@@ -21,5 +21,6 @@ for col in dict_cols:
     df = df.drop(col, axis=1).join(col_df)
 
 # 打印展平后的DataFrame
-print(df)
-df.to_csv('flattened_search_results.csv', index=False)
+# print(df)
+df.to_excel('flattened_search_results.xlsx',  index=False)
+# save dataframe df to excel file
